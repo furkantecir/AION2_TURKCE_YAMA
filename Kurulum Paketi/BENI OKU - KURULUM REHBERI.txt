@@ -1,0 +1,46 @@
+﻿======================================================================
+                     AION 2 TÃœRKÃ‡E YAMA v1.0.0
+                   GeliÅŸtirici & Proje Sahibi: FuTe
+                 GitHub: https://github.com/furkantecir
+======================================================================
+
+Bu paket, AION 2 iÃ§in hazÄ±rlanan kapsamlÄ± ve gÃ¼venli TÃ¼rkÃ§e yerelleÅŸtirme
+yazÄ±lÄ±mÄ±nÄ± (AION2TR BaÅŸlatÄ±cÄ±) ve 1.0.0 sÃ¼rÃ¼m TÃ¼rkÃ§e yama dosyalarÄ±nÄ± iÃ§erir.
+
+----------------------------------------------------------------------
+1. NASIL KURULUR?
+----------------------------------------------------------------------
+1. 'Aion2TR.exe' dosyasÄ±nÄ± Ã§alÄ±ÅŸtÄ±rÄ±n.
+2. Program, bilgisayarÄ±nÄ±zda Steam Ã¼zerinden kurulu olan AION 2 oyununu
+   otomatik olarak tespit edecektir.
+   (EÄŸer otomatik bulunamazsa, sol alttaki 'Oyun KlasÃ¶rÃ¼nÃ¼ SeÃ§' baÄŸlantÄ±sÄ±na
+   tÄ±klayarak oyunun kurulu olduÄŸu ana klasÃ¶rÃ¼ seÃ§ebilirsiniz).
+3. SaÄŸ alttaki 'TÃœRKÃ‡E YAMAYI KUR' butonuna tÄ±klayÄ±n.
+4. BirkaÃ§ saniye iÃ§inde yama kurulacak ve durum 'TÃœRKÃ‡E YAMA HAZIR' olacaktÄ±r.
+5. 'OYUNU BAÅLAT' butonuna tÄ±klayarak oyunu TÃ¼rkÃ§e olarak baÅŸlatabilirsiniz!
+
+----------------------------------------------------------------------
+2. GÃœVENLÄ°K VE ANTÄ°-CHEAT (NCGuard) UYUMLULUÄU
+----------------------------------------------------------------------
+- Bu yama oyunun yÃ¼rÃ¼tÃ¼lebilir dosyalarÄ±nÄ± (.exe / .dll) ASLA DEÄÄ°ÅTÄ°RMEZ.
+- Oyun motorunun resmi Unreal Engine L10N metodolojisini (boÅŸ stub + yerel metin)
+  kullanÄ±r.
+- Ä°ÅŸlem Ã¶ncesinde orijinal oyun dosyalarÄ±nÄ±z otomatik olarak yedeklenir.
+- Yama kaldÄ±rÄ±ldÄ±ÄŸÄ±nda oyun dosyalarÄ±nÄ±z %100 orijinal ve temiz haline geri dÃ¶ner.
+
+----------------------------------------------------------------------
+3. YAMAYI KALDIRMA VEYA ONARMA
+----------------------------------------------------------------------
+- YamayÄ± kaldÄ±rmak iÃ§in: BaÅŸlatÄ±cÄ±daki 'YamayÄ± KaldÄ±r' baÄŸlantÄ±sÄ±na tÄ±klamanÄ±z
+  yeterlidir. Orijinal dosyalar anÄ±nda geri yÃ¼klenir.
+- Dosyalarda herhangi bir Ã§akÄ±ÅŸma olursa: 'DosyalarÄ± Onar' seÃ§eneÄŸi ile oyun
+  resmi temiz durumuna otomatik sÄ±fÄ±rlanabilir.
+
+----------------------------------------------------------------------
+4. Ä°LETÄ°ÅÄ°M VE GÃœNCELLEMELER
+----------------------------------------------------------------------
+GeliÅŸtirici: FuTe (Furkan Tecir)
+GitHub SayfasÄ±: https://github.com/furkantecir
+Hata bildirimleri, geri bildirimler ve yeni gÃ¼ncellemeler iÃ§in GitHub
+sayfasÄ±nÄ± ziyaret edebilirsiniz.
+======================================================================

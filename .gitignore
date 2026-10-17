@@ -1,0 +1,34 @@
+## Visual Studio & .NET Build Outputs
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+_ReSharper*/
+*.DotSettings.user
+
+## Temporary & Log Files
+reports/
+artifacts/
+*.tmp
+*.log
+*.dump
+
+## Executables & Binaries
+*.exe
+*.dll
+
+## Game Archives & Raw Data
+*.ucas
+*.utoc
+*.sig
+*.locres
+*.locmeta
+*.umap
+*.uasset
+
+## Exception: Allow patch data files in Kurulum Paketi
+!Kurulum Paketi/patch/english_empty_stub.pak
+!Kurulum Paketi/patch/L10NString.dat
