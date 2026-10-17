@@ -3,8 +3,6 @@
 Aion2TR, AION 2 için geliştirilmiş modern, güvenli, taşınabilir ve oyun güncellemelerine tam uyumlu bir Türkçe yerelleştirme yönetim aracıdır.
 
 Geliştirici: **Furkan Tecir (FuTe)**  
-GitHub: [https://github.com/furkantecir](https://github.com/furkantecir)  
-Proje Bağlantısı: [https://github.com/furkantecir/AION2_TURKCE_YAMA](https://github.com/furkantecir/AION2_TURKCE_YAMA)  
 Sürüm: **v1.0.0 (Portable)**  
 Lisans: **MIT**  
 
@@ -112,10 +110,7 @@ Geliştiriciler için kaynak koddan derleme adımları:
 
 ---
 
-## Lisans ve İletişim
+## Lisans
 
-Bu proje [MIT Lisansı](LICENSE) altında sunulmaktadır.
+Bu proje [MIT Lisansı](LICENSE) altında sunulmaktadır. Telif Hakkı (c) 2026 **Furkan Tecir (FuTe)**. Tüm hakları saklıdır.
 
-- **Geliştirici:** Furkan Tecir (FuTe)
-- **GitHub:** [https://github.com/furkantecir](https://github.com/furkantecir)
-- **Proje Deposu:** [https://github.com/furkantecir/AION2_TURKCE_YAMA](https://github.com/furkantecir/AION2_TURKCE_YAMA)
