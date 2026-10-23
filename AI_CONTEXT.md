@@ -10,7 +10,7 @@ Bu doküman, projeye gelecekte dönüldüğünde yapay zekanın (veya geliştiri
 - **Geliştirici:** Furkan Tecir (FuTe)
 - **Oyun:** AION 2 (Unreal Engine 5.3)
 - **Steam AppID:** `3393110`
-- **Mevcut Sürüm:** v1.0.0 (Portable / Taşınabilir)
+- **Mevcut Sürüm:** v1.0.1 (Portable / Taşınabilir - 2026-10-23 Güncellemesi)
 - **Depolar:**
   - **Gizli (Private) Tam Yedek:** `https://github.com/furkantecir/A-ON2_TURK-E_YAMA.git`
   - **Genel (Public) Açık Kaynak:** `https://github.com/furkantecir/AION2_TURKCE_YAMA.git`
@@ -24,7 +24,8 @@ Bu doküman, projeye gelecekte dönüldüğünde yapay zekanın (veya geliştiri
    - Eski şüpheli yama yapısı ve arka kapı (backdoor) riskleri incelendi, tamamen elendi.
    - Oyunun ana çalıştırılabilir dosyalarına (`.exe`), DLL'lerine veya oyun belleğine müdahale etmeyen; yalnızca `pakchunk502000-Windows_0_P.pak` arşivindeki `L10NString.dat` veri dosyasını işleyen sıfır riskli bir altyapı kuruldu.
 2. **Çeviri Sözlüğü ve Doğrulama:**
-   - 153.042 satırlık dil veritabanı Unreal Engine format değişkenleri (`%s`, `{0}`, `<color>` vb.) korunarak Türkçeleştirildi.
+   - 153.185 satırlık dil veritabanı Unreal Engine format değişkenleri (`%s`, `{0}`, `<color>` vb.) korunarak eksiksiz Türkçeleştirildi.
+   - 2026-10-23 oyun güncellemesinde 152.815 satır sıfır kayıpla korunmuş, 370 adet yeni/güncellenen satır tercüme edilerek v1.0.1 yaması derlenmiştir.
    - Oyunda canlı olarak test edildi ve sorunsuz çalıştığı doğrulandı.
 3. **WPF Modern Başlatıcı (Launcher):**
    - MVVM mimarisiyle modern, karanlık temalı masaüstü arayüzü kodlandı.
@@ -32,10 +33,10 @@ Bu doküman, projeye gelecekte dönüldüğünde yapay zekanın (veya geliştiri
    - Steam Registry ve `libraryfolders.vdf` üzerinden otomatik oyun dizini algılama entegre edildi.
    - Tek tıkla "Yamayı Kur", "Orijinale Dön (Yamayı Kaldır)" ve "Oyunu Başlat" mekanizmaları tamamlandı.
 4. **Dağıtım Paketi:**
-   - Kurulum sihirbazı gerektirmeyen, bağımsız taşınabilir `Kurulum Paketi/` ve `AION2TR_v1.0.0_Kurulum_Paketi.zip` oluşturuldu.
-   - 28 adet birim ve entegrasyon testi (%100 başarıyla) tamamlandı.
+   - Kurulum sihirbazı gerektirmeyen, bağımsız taşınabilir `Kurulum Paketi/` ve `AION2TR_v1.0.1_Kurulum_Paketi.zip` oluşturuldu.
+   - 78 adet birim ve entegrasyon testi (%100 başarıyla) tamamlandı.
 5. **Açık Kaynak Dağıtımı:**
-   - İç geliştirme raporlarından arındırılmış `github_public` klasörü hazırlanıp GitHub'a yüklendi ve v1.0.0 Release paketi yayınlandı.
+   - İç geliştirme raporlarından arındırılmış `github_public` klasörü hazırlanıp GitHub'a yüklendi ve v1.0.1 Release paketi senkronize edildi.
 
 ---
 
@@ -53,9 +54,9 @@ AİON2_TURKCE_YAMA/
 │   ├── Aion2TR.exe                         # WPF Tek Dosya Başlatıcı (Self-contained)
 │   ├── BENI OKU - KURULUM REHBERI.txt      # Kullanıcı talimatları
 │   └── patch/                              # Dağıtılacak yama veri paketi
-│       ├── L10NString.dat                  # 153.042 satırlık Türkçe ikili veri dosyası
+│       ├── L10NString.dat                  # 153.185 satırlık Türkçe ikili veri dosyası
 │       ├── english_empty_stub.pak          # Güvenli dil paketi stub dosyası
-│       └── runtime_manifest.json           # SHA-256 bütünlük ve sürüm bildirimi
+│       └── runtime_manifest.json           # SHA-256 bütünlük ve sürüm bildirimi (v1.0.1)
 │
 ├── src/                                    # Ana Uygulama Kaynak Kodları
 │   ├── Aion2TR.App/                        # WPF Kullanıcı Arayüzü (XAML + C#)

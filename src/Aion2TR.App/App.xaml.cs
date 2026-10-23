@@ -28,7 +28,7 @@ public partial class App : Application
         }
 
         AppLogger.Info("==================================================");
-        AppLogger.Info("AION2TR Application Started (v1.0.0)");
+        AppLogger.Info("AION2TR Application Started (v1.0.1)");
         AppLogger.Info("==================================================");
 
         AppDomain.CurrentDomain.UnhandledException += (s, args) =>

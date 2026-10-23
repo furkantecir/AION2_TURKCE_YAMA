@@ -52,8 +52,8 @@ public class MainViewModel : ViewModelBase
     private bool _showSettingsPopup;
 
     // Versioning
-    public string AppVersion => "1.0.0";
-    public string PatchVersion => "1.0.0";
+    public string AppVersion => "1.0.1";
+    public string PatchVersion => "1.0.1";
     public string AppVersionText => $"AION2TR v{AppVersion}";
     public string PatchVersionText => $"v{PatchVersion}";
 
@@ -391,13 +391,13 @@ public class MainViewModel : ViewModelBase
                     {
                         CanLaunch = true;
                         PrimaryButtonText = "Oyunu Başlat";
-                        StatusDescription = "Yama sürümü: 1.0.0 — Oyun Türkçe olarak oynamaya hazır.";
+                        StatusDescription = $"Yama sürümü: {PatchVersion} — Oyun Türkçe olarak oynamaya hazır.";
                     }
                     else
                     {
                         CanLaunch = false;
                         PrimaryButtonText = "Durumu Yenile";
-                        StatusDescription = "Yama sürümü: 1.0.0 — Türkçe yama kurulu. Oyunu Steam kütüphanenizden başlatabilirsiniz.";
+                        StatusDescription = $"Yama sürümü: {PatchVersion} — Türkçe yama kurulu. Oyunu Steam kütüphanenizden başlatabilirsiniz.";
                     }
                     break;
 

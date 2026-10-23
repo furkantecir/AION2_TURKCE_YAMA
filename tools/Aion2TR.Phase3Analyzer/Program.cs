@@ -24,6 +24,18 @@ internal class Program
     {
         Console.OutputEncoding = Encoding.UTF8;
 
+        if (args.Length > 0 && args[0] == "--process-update")
+        {
+            await GameUpdatePipeline.RunAsync();
+            return;
+        }
+
+        if (args.Length > 0 && args[0] == "--apply-update")
+        {
+            await UpdateTranslationApplier.ApplyAndBuildAsync();
+            return;
+        }
+
         if (args.Length > 0 && args[0] == "--build-phase5-artifact")
         {
             await Phase5Builder.BuildAndValidateTestArtifactAsync();

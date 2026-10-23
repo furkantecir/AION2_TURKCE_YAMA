@@ -137,7 +137,7 @@ public class Phase6Tests
         {
             var res = await service.VerifyContainersAsync(gameRoot);
             Assert.True(res.IsAllSafe, "Official containers must remain 100% untouched!");
-            Assert.Equal(4, res.Items.Count);
+            Assert.Equal(2, res.Items.Count);
             Assert.All(res.Items, item => Assert.True(item.IsMatch));
         }
     }

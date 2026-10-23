@@ -1,22 +1,22 @@
 ﻿{
-    "artifactId":  "AION2TR_V2_STEP8_FULL",
-    "version":  "1.0.0",
-    "displayName":  "AION 2 TÃ¼rkÃ§e Yama",
-    "author":  "FuTe (Furkan Tecir)",
-    "projectUrl":  "https://github.com/furkantecir",
-    "timestampUtc":  "2026-10-17T00:05:45.4529783Z",
-    "files":  [
-                  {
-                      "name":  "L10NString.dat",
-                      "role":  "loose_dat",
-                      "size":  7049892,
-                      "sha256":  "71778c2cbf51580208761f1c3a4f8abd97cddb2dac54c507292fd55e21a43e7e"
-                  },
-                  {
-                      "name":  "english_empty_stub.pak",
-                      "role":  "stub_pak",
-                      "size":  413,
-                      "sha256":  "105a71d61c9a0683500007bb8dab1cf3f12acfd28f17181408ceda426fc3d5b2"
-                  }
-              ]
+  "artifactId": "AION2TR_V2_STEP8_FULL",
+  "version": "1.0.1",
+  "displayName": "AION 2 Türkçe Yama",
+  "author": "FuTe (Furkan Tecir)",
+  "projectUrl": "https://github.com/furkantecir",
+  "timestampUtc": "2026-10-23T11:03:41.9762883Z",
+  "files": [
+    {
+      "name": "L10NString.dat",
+      "role": "loose_dat",
+      "size": 7058052,
+      "sha256": "5d6dcd1afcddbf6ce7acb2d257ec5d5c7ec69482802a2f74e0b9f9fae12601e5"
+    },
+    {
+      "name": "english_empty_stub.pak",
+      "role": "stub_pak",
+      "size": 413,
+      "sha256": "105a71d61c9a0683500007bb8dab1cf3f12acfd28f17181408ceda426fc3d5b2"
+    }
+  ]
 }

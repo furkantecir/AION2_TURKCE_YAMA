@@ -27,10 +27,10 @@ public class ArtifactDescriptor
     public string RelativeDatPath { get; set; } = Path.Combine("v2", "artifacts", "step8", "L10NString.tr-TR.full.dat");
 
     [JsonPropertyName("expectedDatHash")]
-    public string ExpectedDatHash { get; set; } = "71778c2cbf51580208761f1c3a4f8abd97cddb2dac54c507292fd55e21a43e7e";
+    public string ExpectedDatHash { get; set; } = "5d6dcd1afcddbf6ce7acb2d257ec5d5c7ec69482802a2f74e0b9f9fae12601e5";
 
     [JsonPropertyName("expectedDatSize")]
-    public long ExpectedDatSize { get; set; } = 7049892;
+    public long ExpectedDatSize { get; set; } = 7058052;
 
     [JsonPropertyName("expectedStubHash")]
     public string ExpectedStubHash { get; set; } = "105a71d61c9a0683500007bb8dab1cf3f12acfd28f17181408ceda426fc3d5b2";
@@ -40,13 +40,13 @@ public class ArtifactDescriptor
 
     // Official game baseline references
     [JsonPropertyName("expectedOfficialPakHash")]
-    public string ExpectedOfficialPakHash { get; set; } = "07d61d63c131ce86a5674be28e14d9d93a11631a8704eb9c85e310123f11088c";
+    public string ExpectedOfficialPakHash { get; set; } = "4565d9d817f6ca8a7a11bbd0d25d0d91c6306c234be5f279ecfb33d5fba47080";
 
     [JsonPropertyName("expectedOfficialPakSize")]
-    public long ExpectedOfficialPakSize { get; set; } = 3745986;
+    public long ExpectedOfficialPakSize { get; set; } = 3749083;
 
     [JsonPropertyName("expectedOfficialSigHash")]
-    public string ExpectedOfficialSigHash { get; set; } = "f8e5b7f4b1e750d22ace1e9319b226210dff4888729edf40774d21d883178325";
+    public string ExpectedOfficialSigHash { get; set; } = "13cbc2d9e4282de7b8c0917dd80c7822ae31aa2f869dcc8bd513fd0d1ee1381d";
 
     [JsonPropertyName("expectedOfficialUcasHash")]
     public string ExpectedOfficialUcasHash { get; set; } = "c8e7146240adc7718e7e7d0b65468a8c71f4c7dd1f8a96e60d9a8daddc30be4f";
@@ -59,8 +59,11 @@ public class ArtifactDescriptor
         ArtifactId = "AION2TR_V2_STEP8_FULL",
         DisplayName = "AION2TR V2 Step 8 (Full 100% Translation)",
         RelativeDatPath = Path.Combine("v2", "artifacts", "step8", "L10NString.tr-TR.full.dat"),
-        ExpectedDatHash = "71778c2cbf51580208761f1c3a4f8abd97cddb2dac54c507292fd55e21a43e7e",
-        ExpectedDatSize = 7049892
+        ExpectedDatHash = "5d6dcd1afcddbf6ce7acb2d257ec5d5c7ec69482802a2f74e0b9f9fae12601e5",
+        ExpectedDatSize = 7058052,
+        ExpectedOfficialPakHash = "4565d9d817f6ca8a7a11bbd0d25d0d91c6306c234be5f279ecfb33d5fba47080",
+        ExpectedOfficialPakSize = 3749083,
+        ExpectedOfficialSigHash = "13cbc2d9e4282de7b8c0917dd80c7822ae31aa2f869dcc8bd513fd0d1ee1381d"
     };
 
     public static ArtifactDescriptor Step3Exact => new()

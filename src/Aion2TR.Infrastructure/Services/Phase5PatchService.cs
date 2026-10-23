@@ -154,10 +154,8 @@ public class Phase5PatchService : IPhase5PatchService
         {
             expectedContainers =
             [
-                ("pakchunk502000-Windows_0_P.pak", "07d61d63c131ce86a5674be28e14d9d93a11631a8704eb9c85e310123f11088c", 3745986),
-                ("pakchunk502000-Windows_0_P.sig", "f8e5b7f4b1e750d22ace1e9319b226210dff4888729edf40774d21d883178325", 760),
-                ("pakchunk502000-Windows_0_P.ucas", "c8e7146240adc7718e7e7d0b65468a8c71f4c7dd1f8a96e60d9a8daddc30be4f", 48),
-                ("pakchunk502000-Windows_0_P.utoc", "588dd500e88bd7cc6170831e78c3409c275018ae13a9c1a8fc21633e43612c7e", 1297)
+                ("pakchunk502000-Windows_0_P.pak", "4565d9d817f6ca8a7a11bbd0d25d0d91c6306c234be5f279ecfb33d5fba47080", 3749083),
+                ("pakchunk502000-Windows_0_P.sig", "13cbc2d9e4282de7b8c0917dd80c7822ae31aa2f869dcc8bd513fd0d1ee1381d", 760)
             ];
         }
 

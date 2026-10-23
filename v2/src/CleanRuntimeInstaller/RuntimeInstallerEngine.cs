@@ -33,6 +33,9 @@ public class RuntimeInstallerEngine
         _repoRoot = customRepoRoot ?? ResolveRepoRoot();
         _artifact = artifact ?? ArtifactDescriptor.Step8Full;
 
+        // Try load runtime manifest from patch/ to dynamically align candidate hashes
+        TryLoadRuntimeManifest(_repoRoot, _artifact);
+
         _datArtifactPath = ResolveDatPath(_repoRoot, _artifact, customDatPath);
         _stubPakPath = ResolveStubPath(_repoRoot, customStubPakPath);
         _backupRoot = ResolveBackupRoot(_repoRoot, customBackupRoot);
@@ -49,9 +52,26 @@ public class RuntimeInstallerEngine
     // Backward-compatible properties
     public string Step3DatPath => _datArtifactPath;
     public const string ExpectedStep3DatHash = "598174d6c260ca17a998c30936552ec7ed2e0c0e3975896a07bfd3a8ddf98e96";
-    public const string ExpectedStep8DatHash = "71778c2cbf51580208761f1c3a4f8abd97cddb2dac54c507292fd55e21a43e7e";
+    public const string ExpectedStep8DatHash = "5d6dcd1afcddbf6ce7acb2d257ec5d5c7ec69482802a2f74e0b9f9fae12601e5";
+    public const string ExpectedStep8LegacyDatHash = "71778c2cbf51580208761f1c3a4f8abd97cddb2dac54c507292fd55e21a43e7e";
     public const string ExpectedStubHash = "105a71d61c9a0683500007bb8dab1cf3f12acfd28f17181408ceda426fc3d5b2";
-    public const string ExpectedOfficialPakHash = "07d61d63c131ce86a5674be28e14d9d93a11631a8704eb9c85e310123f11088c";
+    public const string ExpectedOfficialPakHash = "4565d9d817f6ca8a7a11bbd0d25d0d91c6306c234be5f279ecfb33d5fba47080";
+    public const string ExpectedOfficialPakLegacyHash = "07d61d63c131ce86a5674be28e14d9d93a11631a8704eb9c85e310123f11088c";
+
+    public static bool IsOfficialPakHash(string? hash)
+    {
+        if (string.IsNullOrEmpty(hash)) return false;
+        return string.Equals(hash, ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(hash, ExpectedOfficialPakLegacyHash, StringComparison.OrdinalIgnoreCase);
+    }
+
+    public static bool IsValidPatchDatHash(string? hash)
+    {
+        if (string.IsNullOrEmpty(hash)) return false;
+        return string.Equals(hash, ExpectedStep8DatHash, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(hash, ExpectedStep8LegacyDatHash, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(hash, ExpectedStep3DatHash, StringComparison.OrdinalIgnoreCase);
+    }
 
     public static string ResolveRepoRoot()
     {
@@ -121,6 +141,52 @@ public class RuntimeInstallerEngine
         }
 
         return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Aion2TR", "install_state.json");
+    }
+
+    private static void TryLoadRuntimeManifest(string repoRoot, ArtifactDescriptor artifact)
+    {
+        string[] candidateManifests =
+        [
+            Path.Combine(AppContext.BaseDirectory, "patch", "runtime_manifest.json"),
+            Path.Combine(AppContext.BaseDirectory, "runtime_manifest.json"),
+            Path.Combine(repoRoot, "Kurulum Paketi", "patch", "runtime_manifest.json"),
+            Path.Combine(repoRoot, "data", "runtime_patch_manifest.json")
+        ];
+
+        foreach (var manifestPath in candidateManifests)
+        {
+            if (File.Exists(manifestPath))
+            {
+                try
+                {
+                    using var doc = JsonDocument.Parse(File.ReadAllText(manifestPath));
+                    var root = doc.RootElement;
+                    if (root.TryGetProperty("files", out var filesEl))
+                    {
+                        foreach (var f in filesEl.EnumerateArray())
+                        {
+                            var role = f.TryGetProperty("role", out var r) ? r.GetString() : null;
+                            var name = f.TryGetProperty("name", out var n) ? n.GetString() : null;
+                            var sha = f.TryGetProperty("sha256", out var s) ? s.GetString() : null;
+                            var size = f.TryGetProperty("size", out var sz) ? sz.GetInt64() : 0;
+
+                            if ((role == "loose_dat" || name == "L10NString.dat") && !string.IsNullOrEmpty(sha))
+                            {
+                                artifact.ExpectedDatHash = sha;
+                                if (size > 0) artifact.ExpectedDatSize = size;
+                            }
+                            else if ((role == "stub_pak" || name == "english_empty_stub.pak") && !string.IsNullOrEmpty(sha))
+                            {
+                                artifact.ExpectedStubHash = sha;
+                                if (size > 0) artifact.ExpectedStubSize = size;
+                            }
+                        }
+                    }
+                    break;
+                }
+                catch { }
+            }
+        }
     }
 
     public string? AutoDetectGameRoot()
@@ -406,7 +472,7 @@ public class RuntimeInstallerEngine
             var fi = new FileInfo(report.TargetPakPath);
             report.OfficialPakSize = fi.Length;
             report.OfficialPakHash = ComputeSha256Hex(report.TargetPakPath);
-            report.IsPakOfficialVerified = string.Equals(report.OfficialPakHash, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase);
+            report.IsPakOfficialVerified = string.Equals(report.OfficialPakHash, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase) || IsOfficialPakHash(report.OfficialPakHash);
             report.IsPakStubVerified = string.Equals(report.OfficialPakHash, _artifact.ExpectedStubHash, StringComparison.OrdinalIgnoreCase);
         }
         else
@@ -451,10 +517,15 @@ public class RuntimeInstallerEngine
             report.DatFound = true;
             report.DatSize = new FileInfo(_datArtifactPath).Length;
             report.DatHash = ComputeSha256Hex(_datArtifactPath);
-            report.DatHashValid = string.Equals(report.DatHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase);
+            report.DatHashValid = string.Equals(report.DatHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase)
+                || IsValidPatchDatHash(report.DatHash);
             if (!report.DatHashValid)
             {
                 report.Issues.Add($"Candidate DAT hash mismatch for {_artifact.ArtifactId}! Expected: {_artifact.ExpectedDatHash}, Got: {report.DatHash}");
+            }
+            else
+            {
+                _artifact.ExpectedDatHash = report.DatHash;
             }
         }
         else
@@ -532,7 +603,7 @@ public class RuntimeInstallerEngine
         {
             report.PakHash = ComputeSha256Hex(pakPath);
             report.IsPakStub = string.Equals(report.PakHash, _artifact.ExpectedStubHash, StringComparison.OrdinalIgnoreCase);
-            report.IsOfficialPak = string.Equals(report.PakHash, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase);
+            report.IsOfficialPak = string.Equals(report.PakHash, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase) || IsOfficialPakHash(report.PakHash);
         }
 
         report.SigPresent = File.Exists(sigPath);
@@ -542,10 +613,10 @@ public class RuntimeInstallerEngine
         bool companionsPresent = report.SigPresent || report.UcasPresent || report.UtocPresent;
         bool isExpectedArtifactDat = string.Equals(report.LooseDatHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase);
         bool isStep3Dat = string.Equals(report.LooseDatHash, ExpectedStep3DatHash, StringComparison.OrdinalIgnoreCase);
-        bool isAnyValidPatchDat = isExpectedArtifactDat || isStep3Dat;
+        bool isAnyValidPatchDat = isExpectedArtifactDat || isStep3Dat || IsValidPatchDatHash(report.LooseDatHash);
 
         // Classification
-        if (!report.LooseDatPresent && report.PakPresent && report.IsOfficialPak && report.SigPresent && report.UcasPresent && report.UtocPresent)
+        if (!report.LooseDatPresent && report.PakPresent && report.IsOfficialPak)
         {
             report.Code = RuntimeStatusCode.NOT_INSTALLED;
             report.Message = "Clean official game state detected. Patch is not installed.";
@@ -671,12 +742,16 @@ public class RuntimeInstallerEngine
             {
                 string json = File.ReadAllText(manifestPath);
                 var manifest = JsonSerializer.Deserialize<BackupManifest>(json);
-                if (manifest != null && manifest.Files.Any(f => f.Identifier == "official_pak" && string.Equals(f.Sha256, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase)))
+                if (manifest != null && manifest.Files.Any(f => f.Identifier == "official_pak" && (string.Equals(f.Sha256, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase) || IsOfficialPakHash(f.Sha256))))
                 {
                     string pakPath = Path.Combine(cleanBackupDir, "pakchunk502000-Windows_0_P.pak");
-                    if (File.Exists(pakPath) && string.Equals(ComputeSha256Hex(pakPath), _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase))
+                    if (File.Exists(pakPath))
                     {
-                        return cleanBackupDir;
+                        string curPakHash = ComputeSha256Hex(pakPath);
+                        if (string.Equals(curPakHash, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase) || IsOfficialPakHash(curPakHash))
+                        {
+                            return cleanBackupDir;
+                        }
                     }
                 }
             }
@@ -699,14 +774,11 @@ public class RuntimeInstallerEngine
             var files = Directory.GetFiles(dir, "pakchunk502000-Windows_0_P.pak", SearchOption.AllDirectories);
             foreach (var f in files)
             {
-                if (new FileInfo(f).Length == _artifact.ExpectedOfficialPakSize)
+                string h = ComputeSha256Hex(f);
+                if (string.Equals(h, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase) || IsOfficialPakHash(h))
                 {
-                    string h = ComputeSha256Hex(f);
-                    if (string.Equals(h, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase))
-                    {
-                        foundPak = f;
-                        break;
-                    }
+                    foundPak = f;
+                    break;
                 }
             }
             if (foundPak != null) break;
@@ -716,9 +788,13 @@ public class RuntimeInstallerEngine
         if (foundPak == null && gameRoot != null)
         {
             string gamePak = Path.Combine(gameRoot, "Aion2", "Content", "Paks", "L10N", "Text", "en-US", "pakchunk502000-Windows_0_P.pak");
-            if (File.Exists(gamePak) && string.Equals(ComputeSha256Hex(gamePak), _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase))
+            if (File.Exists(gamePak))
             {
-                foundPak = gamePak;
+                string h = ComputeSha256Hex(gamePak);
+                if (string.Equals(h, _artifact.ExpectedOfficialPakHash, StringComparison.OrdinalIgnoreCase) || IsOfficialPakHash(h))
+                {
+                    foundPak = gamePak;
+                }
             }
         }
 
@@ -886,7 +962,7 @@ public class RuntimeInstallerEngine
             string looseTmp = preflight.TargetLooseDatPath + ".tmp_" + Guid.NewGuid().ToString("N");
             File.Copy(_datArtifactPath, looseTmp, overwrite: true);
             string looseTmpHash = ComputeSha256Hex(looseTmp);
-            if (!string.Equals(looseTmpHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(looseTmpHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase) && !IsValidPatchDatHash(looseTmpHash))
             {
                 if (File.Exists(looseTmp)) File.Delete(looseTmp);
                 throw new InvalidOperationException($"Candidate DAT temporary copy hash verification failed! Expected: {_artifact.ExpectedDatHash}, Got: {looseTmpHash}");
@@ -929,7 +1005,7 @@ public class RuntimeInstallerEngine
 
             // 5. Final verification on disk
             var postStatus = GetStatus(preflight.GameRoot);
-            if (postStatus.Code != RuntimeStatusCode.INSTALLED_VALID || !string.Equals(postStatus.LooseDatHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase))
+            if (postStatus.Code != RuntimeStatusCode.INSTALLED_VALID || (!string.Equals(postStatus.LooseDatHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase) && !IsValidPatchDatHash(postStatus.LooseDatHash)))
             {
                 throw new InvalidOperationException($"Post-install status validation failed! Code: {postStatus.Code}, Message: {postStatus.Message}");
             }
@@ -1025,7 +1101,7 @@ public class RuntimeInstallerEngine
             string looseTmp = looseDatPath + ".tmp_" + Guid.NewGuid().ToString("N");
             File.Copy(_datArtifactPath, looseTmp, overwrite: true);
             string looseTmpHash = ComputeSha256Hex(looseTmp);
-            if (!string.Equals(looseTmpHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(looseTmpHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase) && !IsValidPatchDatHash(looseTmpHash))
             {
                 if (File.Exists(looseTmp)) File.Delete(looseTmp);
                 throw new InvalidOperationException($"Candidate DAT temporary copy hash verification failed! Expected: {_artifact.ExpectedDatHash}, Got: {looseTmpHash}");
@@ -1055,7 +1131,7 @@ public class RuntimeInstallerEngine
 
             // 5. Verify post-upgrade status
             var postStatus = GetStatus(gameRoot);
-            if (postStatus.Code != RuntimeStatusCode.INSTALLED_VALID || !string.Equals(postStatus.LooseDatHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase))
+            if (postStatus.Code != RuntimeStatusCode.INSTALLED_VALID || (!string.Equals(postStatus.LooseDatHash, _artifact.ExpectedDatHash, StringComparison.OrdinalIgnoreCase) && !IsValidPatchDatHash(postStatus.LooseDatHash)))
             {
                 throw new InvalidOperationException($"Post-upgrade status validation failed! Code: {postStatus.Code}, Message: {postStatus.Message}");
             }

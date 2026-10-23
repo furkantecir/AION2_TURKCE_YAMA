@@ -3,8 +3,7 @@
 Aion2TR, AION 2 için geliştirilmiş modern, güvenli, taşınabilir ve oyun güncellemelerine tam uyumlu bir Türkçe yerelleştirme yönetim aracıdır.
 
 Geliştirici: **Furkan Tecir (FuTe)**  
-Sürüm: **v1.0.0 (Portable)**  
-Lisans: **MIT**  
+Sürüm: **v1.0.1 (Portable)** (2026-10-23 Oyun Güncellemesiyle Uyumlu)  
 
 ---
 
@@ -37,34 +36,43 @@ Lisans: **MIT**
 
 ---
 
-## Hızlı Başlangıç (Kullanıcı Rehberi)
+## Genel Bakış
 
-1. **İndirme:** Güncel hazır paketi [Releases (Sürümler)](https://github.com/furkantecir/AION2_TURKCE_YAMA/releases) sayfasından `AION2TR_v1.0.0_Kurulum_Paketi.zip` olarak indirin.
-2. **Arşivden Çıkarma:** İndirdiğiniz zip arşivini bilgisayarınızda istediğiniz bir klasöre çıkartın.
-3. **Çalıştırma:** Klasör içerisindeki `Aion2TR.exe` dosyasını çalıştırın (Herhangi bir kurulum sihirbazı veya yükleme gerektirmez).
-4. **Oyun Dizinini Doğrulama:** Başlatıcı Steam kütüphanenizi ve AION 2 dizinini otomatik olarak tanır. Oyun farklı bir konumdaysa "Gözat" ile ana dizini seçebilirsiniz.
-5. **Yamayı Kur:** "Yamayı Kur" butonuna tıklayın. Sistem orijinal dosyayı otomatik olarak yedekler ve yerelleştirilmiş veriyi entegre eder.
-6. **Oyuna Giriş:** "Oyunu Başlat" butonuyla veya doğrudan Steam üzerinden oyuna giriş yapın.
-7. **Orijinale Dönme:** İstediğiniz zaman arayüzdeki "Orijinale Dön (Yamayı Kaldır)" butonuna tıklayarak oyunu tek tıkla orijinal durumuna döndürebilirsiniz.
+Aion2TR, oyunun yerelleştirme paketlerini Unreal Engine PAK yapısına uygun biçimde doğrudan işleyen modern bir altyapı üzerine kuruludur. Harici yükleyicilere, reklam yazılımlarına veya karmaşık kurulum sihirbazlarına ihtiyaç duymadan tek bir taşınabilir uygulama olarak çalışır.
+
+Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protokolüyle yürütülür; bu sayede kullanıcı verisi ve oyun dosyaları her zaman güvence altındadır.
 
 ---
 
-## Öne Çıkan Özellikler
+## Temel Özellikler
 
-- **Taşınabilir (Portable) Yapı:** Windows Registry (Kayıt Defteri) kirliliği yaratmaz; tamamen bağımsız klasör mimarisiyle çalışır.
-- **Otomatik Steam Entegrasyonu:** Steam'in `libraryfolders.vdf` yapılandırmasını okuyarak oyun dizinini otomatik keşfeder; oyun durumunu (çalışıyor/kapalı) anlık izler.
-- **Doğrudan Unreal Engine PAK Entegrasyonu:** Yama işlemi harici bellek müdahaleleri yerine doğrudan oyunun standart `pakchunk502000-Windows_0_P.pak` arşiv protokolüyle gerçekleştirilir.
-- **153.000+ Satır Kapsamlı Çeviri:** Oyun içi diyaloglar, görev açıklamaları, eşya adları, arayüz metinleri ve sistem terimleri titizlikle yerelleştirilmiştir.
-- **SHA-256 Otomatik Yedekleme Güvencesi:** Her işlem öncesinde orijinal oyun dosyasının hash doğrulamalı yedeği alınır. Veri kaybı veya bozulma riski bulunmaz.
-- **Anti-Cheat Dostu Güvenlik:** Oyunun çalıştırılabilir dosyalarına (`.exe`), dinamik kütüphanelerine (`.dll`) veya oyun belleğine müdahale edilmez. Üçüncü taraf hook/enjeksiyon içermez.
+- **Taşınabilir (Portable) Mimari:** Sisteme herhangi bir kayıt defteri yükü getirmeden, doğrudan klasöründen tıkla-çalıştır mantığıyla çalışır.
+- **Otomatik Steam Tespiti:** Steam kütüphanelerini (`libraryfolders.vdf`) ve AION 2 kurulum dizinini otomatik olarak tanır; istenildiğinde manuel dizin seçimine olanak tanır.
+- **Doğrudan PAK Entegrasyonu:** Türkçe yerelleştirme verisini `pakchunk502000-Windows_0_P.pak` arşivine standartlara uygun biçimde entegre eder.
+- **Kapsamlı Dil Desteği:** 153.185 satırdan oluşan güncel oyun terimleri, görevler, arayüz metinleri ve eşya açıklamaları eksiksiz Türkçeleştirilmiştir.
+- **Güvenli Yedekleme ve Geri Alma:** Yama kurulmadan önce orijinal oyun dosyasının yedeği otomatik olarak alınır. "Orijinale Dön" seçeneğiyle tek tıkla orijinal duruma geri dönülebilir.
+- **Doğrudan Oyunu Başlatma:** Yama kurulumunun ardından doğrudan başlatıcı üzerinden Steam aracılığıyla oyun başlatılabilir.
+- **Anti-Cheat ve Sistem Güvenliği:** Oyunun ana çalıştırılabilir dosyalarına (`.exe`), dinamik kütüphanelerine (`.dll`) veya oyun belleğine müdahale etmez; üçüncü taraf bellek enjeksiyonu içermez.
 
 ---
 
-## Güvenlik ve Bütünlük Standartları
+## Kullanım Kılavuzu
 
-- **Salt Veri Katmanı:** Değişiklikler yalnızca metin ve yerelleştirme veri katmanında uygulanır.
-- **Format Değişkeni Koruması:** Oyun motoru değişkenleri (`%s`, `{0}`, `<color>` vb.) çeviri aşamasında korunarak metin taşması veya oyun çökmesi engellenmiştir.
-- **Tam Geri Alınabilirlik:** Yama kaldırıldığında yedeklenen orijinal paket geri yüklenir ve doğrulama tamamlanır.
+1. **İndirme:** `AION2TR_v1.0.0_Kurulum_Paketi.zip` arşivini istediğiniz bir dizine çıkartın.
+2. **Başlatma:** Klasör içerisindeki `Aion2TR.exe` dosyasını çalıştırın.
+3. **Dizin Kontrolü:** Uygulama oyun yolunu otomatik olarak bulacaktır. Farklı bir sürücüde kuruluysa "Gözat" ile oyun ana dizinini seçin.
+4. **Yamayı Kur:** "Yamayı Kur" butonuna basarak kurulumu tamamlayın.
+5. **Oyuna Giriş:** "Oyunu Başlat" butonuyla veya doğrudan Steam üzerinden oyuna giriş yapın.
+6. **Kaldırma:** İstediğiniz zaman "Orijinale Dön (Yamayı Kaldır)" butonuna tıklayarak orijinal dil paketine dönebilirsiniz.
+
+---
+
+## Güvenlik İlkeleri
+
+- **Dosya Bütünlüğü:** İşlem yapılan tüm dosyalar SHA-256 hash doğrulaması ile kontrol edilir.
+- **Sıfır Enjeksiyon:** Bellek kancalama (memory hook), DLL enjeksiyonu veya harici arka plan servisleri kullanılmaz.
+- **Geri Alınabilirlik:** Orijinal dosya bütünlüğü korunur; yama kaldırıldığında oyun orijinal durumuna döner.
+- **Placeholder Koruması:** Oyun motoruna ait sistem değişkenleri (`%s`, `{0}`, `<color>` vb.) çeviri aşamasında korunarak biçimlendirme hataları önlenmiştir.
 
 ---
 
@@ -73,44 +81,43 @@ Lisans: **MIT**
 ```text
 Aion2TR/
 ├── src/
-│   ├── Aion2TR.App/            # Modern WPF başlatıcı arayüzü (MVVM)
-│   ├── Aion2TR.Core/           # Temel domain modelleri ve arayüzler
-│   └── Aion2TR.Infrastructure/ # PAK arşivi, Steam API ve dosya servisleri
+│   ├── Aion2TR.App/            # WPF modern başlatıcı arayüzü (MVVM)
+│   ├── Aion2TR.Core/           # Temel iş mantığı, modeller ve veri yapıları
+│   └── Aion2TR.Infrastructure/ # PAK işleme, Steam tespiti ve yedekleme servisleri
 ├── v2/
-│   └── src/
-│       └── CleanRuntimeInstaller/ # Atomik yükleme, geri alma ve işlem denetleyicisi
+│   ├── src/                    # Çeviri eşleme ve paketleme araçları
+│   └── data/                   # Eşleme ve sözlük veritabanı
 ├── tests/
-│   └── Aion2TR.Tests/          # Doğrulama testleri
-├── Kurulum Paketi/             # Dağıtım paketi şablonu ve patch verileri
+│   └── Aion2TR.Tests/          # xUnit test paketi
+├── Kurulum Paketi/             # Taşınabilir son kullanıcı dağıtım paketi
 ├── screenshots/                # Uygulama ekran görüntüleri
 ├── docs/                       # Teknik mimari ve güvenlik dokümanları
-├── LICENSE                     # MIT Açık Kaynak Lisansı
-└── Aion2TR.sln                 # .NET Çözüm dosyası
+└── Aion2TR.sln                 # Visual Studio / .NET çözüm dosyası
 ```
 
 ---
 
-## Kaynak Koddan Derleme
+## Derleme ve Geliştirme
 
-Geliştiriciler için kaynak koddan derleme adımları:
+Projeyi kaynak koddan derlemek için:
 
 1. **Gereksinimler:** Windows 10/11, .NET 8 veya .NET 10 SDK
-2. **Çözümü Derleme:**
+2. **Derleme:**
    ```powershell
    dotnet build Aion2TR.sln -c Release
    ```
-3. **Testleri Çalıştırma:**
+3. **Testlerin Çalıştırılması:**
    ```powershell
-   dotnet test v2/tests/CleanRuntimeInstaller.Tests/CleanRuntimeInstaller.Tests.csproj
+   dotnet test Aion2TR.sln
    ```
-4. **Tek Dosya (Single-File) Olarak Paketleme:**
+4. **Taşınabilir Paket Yayını:**
    ```powershell
    dotnet publish src/Aion2TR.App/Aion2TR.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
    ```
 
 ---
 
-## Lisans
+## Lisans ve Haklar
 
-Bu proje [MIT Lisansı](LICENSE) altında sunulmaktadır. Telif Hakkı (c) 2026 **Furkan Tecir (FuTe)**. Tüm hakları saklıdır.
+Telif Hakkı (c) 2026 **Furkan Tecir (FuTe)**. Tüm hakları saklıdır.
 
