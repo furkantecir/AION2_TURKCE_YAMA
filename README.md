@@ -58,7 +58,7 @@ Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protoko
 
 ## Kullanım Kılavuzu
 
-1. **İndirme:** `AION2TR_v1.0.0_Kurulum_Paketi.zip` arşivini istediğiniz bir dizine çıkartın.
+1. **İndirme:** `AION2TR_v1.0.1_Kurulum_Paketi.zip` arşivini istediğiniz bir dizine çıkartın.
 2. **Başlatma:** Klasör içerisindeki `Aion2TR.exe` dosyasını çalıştırın.
 3. **Dizin Kontrolü:** Uygulama oyun yolunu otomatik olarak bulacaktır. Farklı bir sürücüde kuruluysa "Gözat" ile oyun ana dizinini seçin.
 4. **Yamayı Kur:** "Yamayı Kur" butonuna basarak kurulumu tamamlayın.

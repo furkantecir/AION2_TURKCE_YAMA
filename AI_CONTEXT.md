@@ -94,7 +94,7 @@ AİON2_TURKCE_YAMA/
 │   └── SAFETY.md                           # Güvenlik ilkeleri
 │
 ├── github_public/                          # Public (açık kaynak) deponun temiz klon klasörü
-└── AION2TR_v1.0.0_Kurulum_Paketi.zip       # Dağıtılmaya hazır paket arşivi (69.7 MB)
+└── AION2TR_v1.0.1_Kurulum_Paketi.zip       # Dağıtılmaya hazır paket arşivi (69.7 MB)
 ```
 
 ---
