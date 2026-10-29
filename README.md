@@ -3,7 +3,7 @@
 Aion2TR, AION 2 için geliştirilmiş modern, güvenli, taşınabilir ve oyun güncellemelerine tam uyumlu bir Türkçe yerelleştirme yönetim aracıdır.
 
 Geliştirici: **Furkan Tecir (FuTe)**  
-Sürüm: **v1.0.1 (Portable)** (2026-10-23 Oyun Güncellemesiyle Uyumlu)  
+Sürüm: **v1.0.2 (Portable)** (2026-10-29 Oyun Güncellemesiyle Uyumlu)  
 
 ---
 
