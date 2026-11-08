@@ -3,7 +3,16 @@
 Aion2TR, AION 2 için geliştirilmiş modern, güvenli, taşınabilir ve oyun güncellemelerine tam uyumlu bir Türkçe yerelleştirme yönetim aracıdır.
 
 Geliştirici: **Furkan Tecir (FuTe)**  
-Sürüm: **v1.0.3 (Portable)** (5 ve 6 kasım 2026)  
+Sürüm: **v1.0.3 (Portable)** (5–6 Kasım 2026 Oyun Güncellemesiyle Uyumlu)  
+Lisans: **MIT**  
+
+<div align="center">
+  <br />
+  <a href="https://github.com/furkantecir/AION2_TURKCE_YAMA/releases/latest">
+    <img src="https://img.shields.io/badge/Aion2TR_v1.0.3-Hemen_İndir_(.zip)-2ea44f?style=for-the-badge&logo=windows&logoColor=white" alt="Yamayı İndir" height="42" />
+  </a>
+  <br /><br />
+</div>
 
 ---
 
@@ -48,8 +57,8 @@ Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protoko
 
 - **Taşınabilir (Portable) Mimari:** Sisteme herhangi bir kayıt defteri yükü getirmeden, doğrudan klasöründen tıkla-çalıştır mantığıyla çalışır.
 - **Otomatik Steam Tespiti:** Steam kütüphanelerini (`libraryfolders.vdf`) ve AION 2 kurulum dizinini otomatik olarak tanır; istenildiğinde manuel dizin seçimine olanak tanır.
-- **Doğrudan PAK Entegrasyonu:** Türkçe yerelleştirme verisini `pakchunk502000-Windows_0_P.pak` arşivine standartlara uygun biçimde entegre eder.
-- **Kapsamlı Dil Desteği:** 153.185 satırdan oluşan güncel oyun terimleri, görevler, arayüz metinleri ve eşya açıklamaları eksiksiz Türkçeleştirilmiştir.
+- **Doğrudan PAK Entegrasyonu:** Türkçe yerelleştirme verisini oyun motoru standartlarına uygun biçimde entegre eder.
+- **Kapsamlı Dil Desteği:** 153.419 satırdan oluşan güncel oyun terimleri, görevler, arayüz metinleri ve eşya açıklamaları eksiksiz Türkçeleştirilmiştir.
 - **Güvenli Yedekleme ve Geri Alma:** Yama kurulmadan önce orijinal oyun dosyasının yedeği otomatik olarak alınır. "Orijinale Dön" seçeneğiyle tek tıkla orijinal duruma geri dönülebilir.
 - **Doğrudan Oyunu Başlatma:** Yama kurulumunun ardından doğrudan başlatıcı üzerinden Steam aracılığıyla oyun başlatılabilir.
 - **Anti-Cheat ve Sistem Güvenliği:** Oyunun ana çalıştırılabilir dosyalarına (`.exe`), dinamik kütüphanelerine (`.dll`) veya oyun belleğine müdahale etmez; üçüncü taraf bellek enjeksiyonu içermez.
@@ -58,12 +67,26 @@ Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protoko
 
 ## Kullanım Kılavuzu
 
-1. **İndirme:** `AION2TR_v1.0.1_Kurulum_Paketi.zip` arşivini istediğiniz bir dizine çıkartın.
+1. **İndirme:** [Releases (Sürümler)](https://github.com/furkantecir/AION2_TURKCE_YAMA/releases/latest) sayfasından `AION2TR_v1.0.3_Kurulum_Paketi.zip` arşivini indirin ve istediğiniz bir klasöre çıkartın.
 2. **Başlatma:** Klasör içerisindeki `Aion2TR.exe` dosyasını çalıştırın.
 3. **Dizin Kontrolü:** Uygulama oyun yolunu otomatik olarak bulacaktır. Farklı bir sürücüde kuruluysa "Gözat" ile oyun ana dizinini seçin.
 4. **Yamayı Kur:** "Yamayı Kur" butonuna basarak kurulumu tamamlayın.
 5. **Oyuna Giriş:** "Oyunu Başlat" butonuyla veya doğrudan Steam üzerinden oyuna giriş yapın.
 6. **Kaldırma:** İstediğiniz zaman "Orijinale Dön (Yamayı Kaldır)" butonuna tıklayarak orijinal dil paketine dönebilirsiniz.
+
+---
+
+## Dağıtım Paketi İçeriği
+
+```text
+AION2TR_v1.0.3_Kurulum_Paketi/
+├── Aion2TR.exe                     # Taşınabilir Türkçe Başlatıcı (Tek Dosya, Kurulum Gerektirmez)
+├── BENI OKU - KURULUM REHBERI.txt  # Hızlı başlangıç ve güvenlik yönergeleri
+└── patch/                          # Doğrulanmış Türkçe yerelleştirme veri paketi
+    ├── L10NString.dat              # 153.419 satırlık Türkçe ikili veri dosyası
+    ├── english_empty_stub.pak      # Güvenli dil paketi stub dosyası
+    └── runtime_manifest.json       # SHA-256 bütünlük bildirimi
+```
 
 ---
 
@@ -76,48 +99,6 @@ Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protoko
 
 ---
 
-## Proje Yapısı
-
-```text
-Aion2TR/
-├── src/
-│   ├── Aion2TR.App/            # WPF modern başlatıcı arayüzü (MVVM)
-│   ├── Aion2TR.Core/           # Temel iş mantığı, modeller ve veri yapıları
-│   └── Aion2TR.Infrastructure/ # PAK işleme, Steam tespiti ve yedekleme servisleri
-├── v2/
-│   ├── src/                    # Çeviri eşleme ve paketleme araçları
-│   └── data/                   # Eşleme ve sözlük veritabanı
-├── tests/
-│   └── Aion2TR.Tests/          # xUnit test paketi
-├── Kurulum Paketi/             # Taşınabilir son kullanıcı dağıtım paketi
-├── screenshots/                # Uygulama ekran görüntüleri
-├── docs/                       # Teknik mimari ve güvenlik dokümanları
-└── Aion2TR.sln                 # Visual Studio / .NET çözüm dosyası
-```
-
----
-
-## Derleme ve Geliştirme
-
-Projeyi kaynak koddan derlemek için:
-
-1. **Gereksinimler:** Windows 10/11, .NET 8 veya .NET 10 SDK
-2. **Derleme:**
-   ```powershell
-   dotnet build Aion2TR.sln -c Release
-   ```
-3. **Testlerin Çalıştırılması:**
-   ```powershell
-   dotnet test Aion2TR.sln
-   ```
-4. **Taşınabilir Paket Yayını:**
-   ```powershell
-   dotnet publish src/Aion2TR.App/Aion2TR.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
-   ```
-
----
-
 ## Lisans ve Haklar
 
 Telif Hakkı (c) 2026 **Furkan Tecir (FuTe)**. Tüm hakları saklıdır.
-
