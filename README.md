@@ -3,13 +3,13 @@
 Aion2TR, AION 2 için geliştirilmiş modern, güvenli, taşınabilir ve oyun güncellemelerine tam uyumlu bir Türkçe yerelleştirme yönetim aracıdır.
 
 Geliştirici: **Furkan Tecir (FuTe)**  
-Sürüm: **v1.0.3 (Portable)** (5–6 Kasım 2026 Oyun Güncellemesiyle Uyumlu)  
+Sürüm: **v1.0.4 (Portable)** (11–12 Kasım 2026 Oyun Güncellemesiyle Uyumlu)  
 Lisans: **MIT**  
 
 <div align="center">
   <br />
   <a href="https://github.com/furkantecir/AION2_TURKCE_YAMA/releases/latest">
-    <img src="https://img.shields.io/badge/Aion2TR_v1.0.3-Hemen_İndir_(.zip)-2ea44f?style=for-the-badge&logo=windows&logoColor=white" alt="Yamayı İndir" height="42" />
+    <img src="https://img.shields.io/badge/Aion2TR_v1.0.4-Hemen_İndir_(.zip)-2ea44f?style=for-the-badge&logo=windows&logoColor=white" alt="Yamayı İndir" height="42" />
   </a>
   <br /><br />
 </div>
@@ -47,7 +47,7 @@ Lisans: **MIT**
 
 ## Genel Bakış
 
-Aion2TR, oyunun yerelleştirme paketlerini Unreal Engine PAK yapısına uygun biçimde doğrudan işleyen modern bir altyapı üzerine kuruludur. Harici yükleyicilere, reklam yazılımlarına veya karmaşık kurulum sihirbazlarına ihtiyaç duymadan tek bir taşınabilir uygulama olarak çalışır.
+Aion2TR, oyunun yerelleştirme paketlerini Unreal Engine mimarisine uygun biçimde doğrudan işleyen modern bir altyapı üzerine kuruludur. Harici yükleyicilere, reklam yazılımlarına veya karmaşık kurulum sihirbazlarına ihtiyaç duymadan tek bir taşınabilir uygulama olarak çalışır.
 
 Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protokolüyle yürütülür; bu sayede kullanıcı verisi ve oyun dosyaları her zaman güvence altındadır.
 
@@ -67,7 +67,7 @@ Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protoko
 
 ## Kullanım Kılavuzu
 
-1. **İndirme:** [Releases (Sürümler)](https://github.com/furkantecir/AION2_TURKCE_YAMA/releases/latest) sayfasından `AION2TR_v1.0.3_Kurulum_Paketi.zip` arşivini indirin ve istediğiniz bir klasöre çıkartın.
+1. **İndirme:** [Releases (Sürümler)](https://github.com/furkantecir/AION2_TURKCE_YAMA/releases/latest) sayfasından `AION2TR_v1.0.4_Kurulum_Paketi.zip` arşivini indirin ve istediğiniz bir klasöre çıkartın.
 2. **Başlatma:** Klasör içerisindeki `Aion2TR.exe` dosyasını çalıştırın.
 3. **Dizin Kontrolü:** Uygulama oyun yolunu otomatik olarak bulacaktır. Farklı bir sürücüde kuruluysa "Gözat" ile oyun ana dizinini seçin.
 4. **Yamayı Kur:** "Yamayı Kur" butonuna basarak kurulumu tamamlayın.
@@ -79,7 +79,7 @@ Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protoko
 ## Dağıtım Paketi İçeriği
 
 ```text
-AION2TR_v1.0.3_Kurulum_Paketi/
+AION2TR_v1.0.4_Kurulum_Paketi/
 ├── Aion2TR.exe                     # Taşınabilir Türkçe Başlatıcı (Tek Dosya, Kurulum Gerektirmez)
 ├── BENI OKU - KURULUM REHBERI.txt  # Hızlı başlangıç ve güvenlik yönergeleri
 └── patch/                          # Doğrulanmış Türkçe yerelleştirme veri paketi
@@ -102,3 +102,4 @@ AION2TR_v1.0.3_Kurulum_Paketi/
 ## Lisans ve Haklar
 
 Telif Hakkı (c) 2026 **Furkan Tecir (FuTe)**. Tüm hakları saklıdır.
+Bu proje [MIT Lisansı](LICENSE) altında sunulmaktadır.
