@@ -3,13 +3,13 @@
 Aion2TR, AION 2 için geliştirilmiş modern, güvenli, taşınabilir ve oyun güncellemelerine tam uyumlu bir Türkçe yerelleştirme yönetim aracıdır.
 
 Geliştirici: **Furkan Tecir (FuTe)**  
-Sürüm: **v1.0.4 (Portable)** (11–12 Kasım 2026 Oyun Güncellemesiyle Uyumlu)  
+Sürüm: **v2.0.0 (Portable)** (23 Kasım 2026 Oyun Güncellemesiyle Uyumlu)  
 Lisans: **MIT**  
 
 <div align="center">
   <br />
   <a href="https://github.com/furkantecir/AION2_TURKCE_YAMA/releases/latest">
-    <img src="https://img.shields.io/badge/Aion2TR_v1.0.4-Hemen_İndir_(.zip)-2ea44f?style=for-the-badge&logo=windows&logoColor=white" alt="Yamayı İndir" height="42" />
+    <img src="https://img.shields.io/badge/Aion2TR_v2.0.0-Hemen_İndir_(.zip)-2ea44f?style=for-the-badge&logo=windows&logoColor=white" alt="Yamayı İndir" height="42" />
   </a>
   <br /><br />
 </div>
@@ -47,9 +47,9 @@ Lisans: **MIT**
 
 ## Genel Bakış
 
-Aion2TR, oyunun yerelleştirme paketlerini Unreal Engine mimarisine uygun biçimde doğrudan işleyen modern bir altyapı üzerine kuruludur. Harici yükleyicilere, reklam yazılımlarına veya karmaşık kurulum sihirbazlarına ihtiyaç duymadan tek bir taşınabilir uygulama olarak çalışır.
+Aion2TR **v2.0.0**, oyunun resmî paketlerine müdahale etmeden doğrudan Unreal Engine 5'in yerel dil katmanını (`Engine.locres`) kullanan modern ve güvenli bir altyapı üzerine kuruludur. Harici yükleyicilere, reklam yazılımlarına veya karmaşık kurulum sihirbazlarına ihtiyaç duymadan tek bir taşınabilir uygulama olarak çalışır.
 
-Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protokolüyle yürütülür; bu sayede kullanıcı verisi ve oyun dosyaları her zaman güvence altındadır.
+Tüm kurulum ve kaldırma adımları atomik dosya operasyonları ve SHA-256 doğrulama protokolüyle yürütülür; orijinal oyun dosyaları (`.pak`, `.sig`, `.exe`, `.dll`) hiç değiştirilmez ve `???` hatası oluşmaz.
 
 ---
 
@@ -57,45 +57,47 @@ Tüm işlem adımları atomik dosya operasyonları ve SHA-256 doğrulama protoko
 
 - **Taşınabilir (Portable) Mimari:** Sisteme herhangi bir kayıt defteri yükü getirmeden, doğrudan klasöründen tıkla-çalıştır mantığıyla çalışır.
 - **Otomatik Steam Tespiti:** Steam kütüphanelerini (`libraryfolders.vdf`) ve AION 2 kurulum dizinini otomatik olarak tanır; istenildiğinde manuel dizin seçimine olanak tanır.
-- **Doğrudan PAK Entegrasyonu:** Türkçe yerelleştirme verisini oyun motoru standartlarına uygun biçimde entegre eder.
-- **Kapsamlı Dil Desteği:** 153.419 satırdan oluşan güncel oyun terimleri, görevler, arayüz metinleri ve eşya açıklamaları eksiksiz Türkçeleştirilmiştir.
-- **Güvenli Yedekleme ve Geri Alma:** Yama kurulmadan önce orijinal oyun dosyasının yedeği otomatik olarak alınır. "Orijinale Dön" seçeneğiyle tek tıkla orijinal duruma geri dönülebilir.
+- **Sıfır `.pak` Müdahalesi (UE5 Native `Engine.locres`):** Resmî `pakchunk*.pak` ve `.sig` dosyalarına dokunmadan `Engine/Content/Localization/Engine/Platforms/Windows/en/` ve `en-US/` yolları üzerinden Türkçe metinleri yükler.
+- **Kapsamlı Dil Desteği:** 153.419 satırlık yapı içerisinde 119.522 Türkçe oyun terimi, görevler, NPC konuşmaları, arayüz metinleri ve eşya açıklamaları yer alır.
+- **Tek Tıkla Temiz Kaldırma:** Yama kaldırıldığında yalnızca iki `Engine.locres` dosyası silinir ve oyun anında %100 orijinal İngilizce durumuna geri döner.
 - **Doğrudan Oyunu Başlatma:** Yama kurulumunun ardından doğrudan başlatıcı üzerinden Steam aracılığıyla oyun başlatılabilir.
-- **Anti-Cheat ve Sistem Güvenliği:** Oyunun ana çalıştırılabilir dosyalarına (`.exe`), dinamik kütüphanelerine (`.dll`) veya oyun belleğine müdahale etmez; üçüncü taraf bellek enjeksiyonu içermez.
+- **Anti-Cheat ve Sistem Güvenliği:** Oyunun ana çalıştırılabilir dosyalarına (`.exe`), dinamik kütüphanelerine (`.dll`), `.pak` arşivlerine veya oyun belleğine müdahale etmez; üçüncü taraf bellek enjeksiyonu içermez.
 
 ---
 
 ## Kullanım Kılavuzu
 
-1. **İndirme:** [Releases (Sürümler)](https://github.com/furkantecir/AION2_TURKCE_YAMA/releases/latest) sayfasından `AION2TR_v1.0.4_Kurulum_Paketi.zip` arşivini indirin ve istediğiniz bir klasöre çıkartın.
-2. **Başlatma:** Klasör içerisindeki `Aion2TR.exe` dosyasını çalıştırın.
-3. **Dizin Kontrolü:** Uygulama oyun yolunu otomatik olarak bulacaktır. Farklı bir sürücüde kuruluysa "Gözat" ile oyun ana dizinini seçin.
-4. **Yamayı Kur:** "Yamayı Kur" butonuna basarak kurulumu tamamlayın.
-5. **Oyuna Giriş:** "Oyunu Başlat" butonuyla veya doğrudan Steam üzerinden oyuna giriş yapın.
-6. **Kaldırma:** İstediğiniz zaman "Orijinale Dön (Yamayı Kaldır)" butonuna tıklayarak orijinal dil paketine dönebilirsiniz.
+1. **İndirme:** [Releases (Sürümler)](https://github.com/furkantecir/AION2_TURKCE_YAMA/releases/latest) sayfasından `AION2TR_v2.0.0_Kurulum_Paketi.zip` arşivini indirin ve istediğiniz bir klasöre çıkartın.
+2. **Oyun Dili Kontrolü:** Oyun içi metin dilinin **English (İngilizce)** olduğundan emin olun.
+3. **Başlatma:** Klasör içerisindeki `Aion2TR.exe` dosyasını çalıştırın.
+4. **Dizin Kontrolü:** Uygulama oyun yolunu otomatik olarak bulacaktır. Farklı bir sürücüde kuruluysa "Konumu Değiştir / Oyun Klasörünü Seç" ile oyun ana dizinini seçin.
+5. **Yamayı Kur:** "Türkçe Yamayı Kur" butonuna basarak kurulumu tamamlayın.
+6. **Oyuna Giriş:** "Oyunu Başlat" butonuyla veya doğrudan Steam üzerinden oyuna giriş yapın.
+7. **Kaldırma:** İstediğiniz zaman "Yamayı Kaldır" bağlantısına tıklayarak eklenen iki `.locres` dosyasını silip orijinal İngilizce haline dönebilirsiniz.
+
+*(Not: Daha önce eski sürümde stub `.pak` yöntemi kuruluysa, başlatıcı bunu otomatik olarak algılar ve önce Steam üzerinden "Oyun Dosyalarının Bütünlüğünü Doğrula" yapmanızı ister.)*
 
 ---
 
 ## Dağıtım Paketi İçeriği
 
 ```text
-AION2TR_v1.0.4_Kurulum_Paketi/
+AION2TR_v2.0.0_Kurulum_Paketi/
 ├── Aion2TR.exe                     # Taşınabilir Türkçe Başlatıcı (Tek Dosya, Kurulum Gerektirmez)
 ├── BENI OKU - KURULUM REHBERI.txt  # Hızlı başlangıç ve güvenlik yönergeleri
-└── patch/                          # Doğrulanmış Türkçe yerelleştirme veri paketi
-    ├── L10NString.dat              # 153.419 satırlık Türkçe ikili veri dosyası
-    ├── english_empty_stub.pak      # Güvenli dil paketi stub dosyası
+└── patch/                          # Doğrulanmış UE5 Türkçe yerelleştirme paketi
+    ├── Engine.locres               # UE5 yerel dil dosyası (153.419 kayıt / 119.522 Türkçe satır)
     └── runtime_manifest.json       # SHA-256 bütünlük bildirimi
 ```
 
 ---
 
-## Güvenlik İlkeleri
+## Güvenlik, Anti-Cheat ve Sorumluluk Bilgilendirmesi
 
-- **Dosya Bütünlüğü:** İşlem yapılan tüm dosyalar SHA-256 hash doğrulaması ile kontrol edilir.
-- **Sıfır Enjeksiyon:** Bellek kancalama (memory hook), DLL enjeksiyonu veya harici arka plan servisleri kullanılmaz.
-- **Geri Alınabilirlik:** Orijinal dosya bütünlüğü korunur; yama kaldırıldığında oyun orijinal durumuna döner.
-- **Placeholder Koruması:** Oyun motoruna ait sistem değişkenleri (`%s`, `{0}`, `<color>` vb.) çeviri aşamasında korunarak biçimlendirme hataları önlenmiştir.
+- **Orijinal Oyun Dosyalarına Sıfır Müdahale:** `AION2.exe`, `.dll`, `.pak` ve `.sig` dosyaları %100 orijinal ve dokunulmamış olarak kalır. Steam üzerinden dosya bütünlüğü doğrulaması yapıldığında eksik veya değişmiş dosya görünmez.
+- **Sıfır Enjeksiyon:** Bellek kancalama (memory hook), DLL enjeksiyonu, koruma atlatma veya arka plan servisleri kullanılmaz.
+- **Dosya Bütünlüğü ve Placeholder Koruması:** Tüm dosyalar SHA-256 hash doğrulaması ile kontrol edilir; oyun motoruna ait sistem değişkenleri (`%s`, `{0}`, `<color>` vb.) çeviri aşamasında korunmuştur.
+- **EULA ve Kullanıcı Sorumluluğu:** Çevrimiçi bir MMORPG oyunda resmî olmayan herhangi bir dosya eklemesi NCSoft kullanıcı sözleşmesi (EULA) gereği teorik olarak %0 ban riski garantisi veremez; kullanım sorumluluğu tamamen kullanıcıya aittir. Teknik olarak mevcut en düşük riskli (salt görsel `.locres` katmanı) yöntem uygulanmıştır. Tedbir amaçlı büyük oyun güncellemeleri ve bakım günleri öncesinde tek tıkla "Yamayı Kaldır" yapmanız önerilir.
 
 ---
 
